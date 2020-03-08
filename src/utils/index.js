@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from './lodash'
 
 export {default as Inject} from './hoc/inject'
 export {default as doLogin} from './hoc/doLogin'
