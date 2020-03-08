@@ -1,3 +1,5 @@
+const path=require('path')
+
 const config = {
   projectName: 'cityFateNext2',
   date: '2020-3-7',
@@ -6,6 +8,10 @@ const config = {
     640: 2.34 / 2,
     750: 1,
     828: 1.81 / 2
+  },
+  alias: {
+    "taro-ui": path.resolve(__dirname, '../lib/taro-ui-fix/src'),
+    "nervjs": path.resolve(__dirname, '../node_modules/react')
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
@@ -62,6 +68,7 @@ const config = {
     }
   },
   h5: {
+    esnextModules: ['taro-ui'],
     publicPath: '/',
     staticDirectory: 'static',
     postcss: {
