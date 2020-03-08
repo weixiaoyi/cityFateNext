@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Provider } from 'mobx-react'
 import store from './store';
 
-
-
 class App extends Component {
   componentDidMount () {}
 
