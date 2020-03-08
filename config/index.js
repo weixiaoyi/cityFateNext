@@ -39,6 +39,7 @@ const config = {
   },
   copy: {
     patterns: [
+      {from: 'src/sitemap.json', to: 'dist/sitemap.json'}
     ],
     options: {
     }
