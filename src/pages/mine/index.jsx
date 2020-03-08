@@ -20,7 +20,7 @@ class Index extends Component {
 
     return (
       <View className={styles.index}>
-        给哈哈哈哈{userArticlesPage}
+        我的
       </View>
     )
   }
