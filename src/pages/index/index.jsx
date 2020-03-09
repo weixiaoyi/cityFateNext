@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { Inject,doLogin } from "../../utils";
 import styles from './index.module.scss'
 import {Tabs} from '../../components'
+import LoadUserList from "./loadUserList";
 
 @doLogin
  @Inject('store')
@@ -19,16 +21,14 @@ class Index extends Component {
   render () {
     const {store:{homeStore:{userArticlesPage}}}=this.props
     const tabList = [
-      { title: '标签页1' },
-      { title: '标签页2' },
-      { title: '标签页3' },
-      { title: '标签页4' },
-      { title: '标签页5' },
-      { title: '标签页6' },
-      { title: '标签页7' },
-      { title: '标签页8' },
-      { title: '标签页9' },
-      ]
+      { title: '同城' },
+      { title: '省内' },
+      { title: '全国' },
+      { title: '诚意会员' },
+      ].map(item=>({
+      ...item,
+      component:<LoadUserList />
+    }))
 
     return (
       <View className={styles.index}>

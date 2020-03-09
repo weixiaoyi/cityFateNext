@@ -1,0 +1,41 @@
+.infoCard{
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border:1PX solid red;
+  .img{
+    display: flex;
+    flex-grow: 1;
+  }
+  .info{
+   padding:15px 15px;
+  }
+  .utils{
+    background: #fafafa;
+    padding: 20px;
+    border-top:1PX solid #f0f0f0;
+    font-size: 28px;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    .util{
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .iconContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .icon{
+        position: relative;
+        top:3px;
+        margin-right: 8px;
+      }
+    }
+    .util+.util{
+      border-left:1px solid #f0f0f0;
+    }
+  }
+}
