@@ -1,41 +1,65 @@
+@import "../../styles/variable.scss";
 .infoCard{
+  padding:30px 0 30px;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
-  border:1PX solid red;
   .img{
-    display: flex;
-    flex-grow: 1;
+    width:200px;
+    height:200px;
+    border-radius: 10px;
   }
-  .info{
-   padding:15px 15px;
-  }
-  .utils{
-    background: #fafafa;
-    padding: 20px;
-    border-top:1PX solid #f0f0f0;
-    font-size: 28px;
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
-    .util{
-      flex-grow: 1;
+  .infos{
+    padding:2px 0;
+    margin-left: 20px;
+
+
+    .name{
+      font-weight: bold;
+    }
+    .baseInfo{
+      margin-top: 20px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      .iconContainer{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      View{
+        padding:0 20px;
+        &:first-child{
+          padding-left: unset;
+        }
       }
-      .icon{
-        position: relative;
-        top:3px;
-        margin-right: 8px;
+      View+View{
+        border-left:1px solid black;
+      }
+
+    }
+    .labels{
+      margin-top: 20px;
+      .label+.label{
+        margin-left: 15px;
+      }
+      .label{
+        height:unset;
+        line-height: unset;
+        padding:8px 15px;
+        border-radius: 10px;
+        border: 1px solid $yellow;
+        color:$black;
+        font-size: 20px;
+        &.nature{
+          background: $yellow;
+          color:white;
+        }
       }
     }
-    .util+.util{
-      border-left:1PX solid #f0f0f0;
+    .otherImages{
+      margin-top: 15px;
+      Image{
+        border-radius: 5px;
+        width:55px;
+        height:55px;
+      }
     }
   }
+}
+
+.infoCard+.infoCard{
+ border-top:1px solid $gray;
 }

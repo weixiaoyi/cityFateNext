@@ -15,25 +15,6 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  // babel: {
-  //   sourceMap: true,
-  //   presets: [
-  //     ['env', {
-  //       modules: false
-  //     }]
-  //   ],
-  //   plugins: [
-  //     // 'transform-decorators-legacy',
-  //     // 'transform-class-properties',
-  //     // 'transform-object-rest-spread',
-  //     // ['transform-runtime', {
-  //     //   "helpers": false,
-  //     //   "polyfill": false,
-  //     //   "regenerator": true,
-  //     //   "moduleName": 'babel-runtime'
-  //     // }]
-  //   ]
-  // },
   plugins: [],
   defineConstants: {
   },
@@ -50,7 +31,7 @@ const config = {
       pxtransform: {
         enable: true,
         config: {
-
+          onePxTransform:false,
         }
       },
       url: {
@@ -76,6 +57,7 @@ const config = {
       autoprefixer: {
         enable: true,
         config: {
+          onePxTransform:false,
           browsers: [
             'last 3 versions',
             'Android >= 4.1',
