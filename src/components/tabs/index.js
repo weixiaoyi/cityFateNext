@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
-import { AtTabs, AtTabsPane } from 'taro-ui'
+import { AtTabs} from 'taro-ui'
 
 class Tabs extends Component {
   state={
@@ -11,20 +11,13 @@ class Tabs extends Component {
     this.setState({
       current: value
     })
+    this.props.onChange&&this.props.onChange(value)
   }
   render() {
-    const {tabList,scroll}=this.props
+    const {tabList,scroll,}=this.props
     const {current}=this.state
     return (
-      <AtTabs scroll={scroll} tabList={tabList} current={current} onClick={this.handleClick.bind(this)}>
-        {
-          tabList.map((item,index)=>(
-            <AtTabsPane  current={current} index={index} key={item.title} >
-              {item.component}
-            </AtTabsPane>
-          ))
-        }
-      </AtTabs>
+      <AtTabs scroll={scroll} tabList={tabList} current={current} onClick={this.handleClick.bind(this)} />
     )
   }
 }

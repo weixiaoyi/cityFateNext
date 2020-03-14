@@ -1,34 +1,23 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import {ScrollView, View} from '@tarojs/components'
 import {InfoCard} from '../../components'
+import styles from    './loadUserList.module.scss'
 
 class LoadUserList extends Component {
   componentDidMount () { }
-
-
   render () {
-    const {}=this.props
-    const props={
-      imageSrc:'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-      description:'miaoshu',
-      utils:[
-        {
-          icon:'star',
-          text:'关注'
-        },
-        {
-          icon:'heart',
-          text:'打招呼'
-        }
-      ]
-    }
-
+    const {dataSource=[],primaryKey}=this.props
     return (
-      <View>
-       list
-        <InfoCard {...props} />
-      </View>
+      <ScrollView scrollY >
+        <View className={styles.loadUserList}>
+          {
+            dataSource.map((item={},index)=>(
+              <InfoCard key={primaryKey||index} {...item} />
+            ))
+          }
+        </View>
+      </ScrollView>
     )
   }
 }
