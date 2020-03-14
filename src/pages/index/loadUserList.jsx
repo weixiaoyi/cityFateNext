@@ -19,7 +19,7 @@ class LoadUserList extends Component {
         },
         {
           icon:'heart',
-          text:'关注'
+          text:'打招呼'
         }
       ]
     }
