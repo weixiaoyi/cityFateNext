@@ -1,3 +1,42 @@
-.index{
-  // color:red;
+@import "../../styles/variable";
+.mine{
+  padding:0 20px;
+  .myInfo{
+    border-bottom:1px solid $gray;
+    .infoContainer{
+      display: flex;
+      Image{
+        width:120px;
+        height:120px;
+        border-radius: 10px;
+      }
+      .infoShort{
+        margin-left: 20px;
+        .name{
+          font-weight: bold;
+        }
+        .baseInfo{
+          margin-top: 15px;
+          display: flex;
+          View{
+            padding:0 20px;
+            &:first-child{
+              padding-left: unset;
+            }
+          }
+          View+View{
+            border-left:1px solid black;
+          }
+        }
+      }
+    }
+    .announce{
+      margin-top: 5px;
+      padding: 20px 10px;
+    }
+
+  }
+
+
+
 }

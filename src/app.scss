@@ -4,3 +4,7 @@ page{
   font-size: $baseFontSize;
   color:$black;
 }
+
+.at-tabs__item {
+  font-size: $baseFontSize !important;
+}

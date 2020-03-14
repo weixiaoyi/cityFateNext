@@ -1,21 +1,22 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
-import {ScrollView, View} from '@tarojs/components'
+import Taro from "@tarojs/taro";
+import { View,} from '@tarojs/components'
 import { Inject,doLogin } from "../../utils";
 import styles from './index.module.scss'
 import {Tabs} from '../../components'
+
 import LoadUserList from "./loadUserList";
+
 
 @doLogin
  @Inject('store')
 class Index extends Component {
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
+  componentDidMount () {
+    // Taro.switchTab({
+    //   url: '/pages/mine/index'
+    // })
+  }
 
 
   render () {
@@ -29,6 +30,7 @@ class Index extends Component {
 
     return (
       <View className={styles.index}>
+
         <View style={{height:50,background:'red'}}>其他测试</View>
         <View className={styles.sticky}>
           <Tabs tabList={tabList} />

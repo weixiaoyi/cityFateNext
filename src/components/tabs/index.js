@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
-import { AtTabs} from 'taro-ui'
+import { AtTabs,} from 'taro-ui'
 
 class Tabs extends Component {
   state={

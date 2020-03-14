@@ -10,7 +10,7 @@ const config = {
     828: 1.81 / 2
   },
   alias: {
-    "taro-ui": path.resolve(__dirname, '../lib/taro-ui-fix/src'),
+    "taro-ui": path.resolve(__dirname, '../lib/taro-ui-fix/src/index.js'),
     "nervjs": path.resolve(__dirname, '../node_modules/react')
   },
   sourceRoot: 'src',

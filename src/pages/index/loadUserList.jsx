@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
 import {ScrollView, View} from '@tarojs/components'
-import {InfoCard} from '../../components'
+import {InfoCard} from '../components'
 import styles from    './loadUserList.module.scss'
 
 class LoadUserList extends Component {
