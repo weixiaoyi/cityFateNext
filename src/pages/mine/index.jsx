@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import {View,Image} from "@tarojs/components";
 import {AtList,AtListItem} from 'taro-ui'
 
-import { Inject,doLogin } from "../../utils";
+import { Inject,doLogin,routerGo } from "../../utils";
 import styles from './index.module.scss'
+import {Title} from "../../components";
+
 
 @doLogin
  @Inject('store')
@@ -32,11 +34,13 @@ class Mine extends Component {
           <View className={styles.announce}>等一人迟暮，择一人终老......愿无岁月可回首；且以深情共白头</View>
         </View>
         <View>
+          <Title>相亲舞台</Title>
           <AtList>
-            <AtListItem title='标题文字' onClick={this.handleClick} />
-            <AtListItem title='标题文字' arrow='right' />
-            <AtListItem title='标题文字' extraText='详细信息' />
-            <AtListItem title='禁用状态' disabled extraText='详细信息' />
+            <AtListItem title='我的资料' arrow='right' onClick={routerGo('mineInfos')} />
+            <AtListItem title='我的动态' arrow='right' />
+            <AtListItem title='我关注的' arrow='right' />
+            <AtListItem title='关注我的' arrow='right' />
+            <AtListItem title='谁看过我' arrow='right' />
           </AtList>
         </View>
       </View>

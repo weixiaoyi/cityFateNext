@@ -13,8 +13,11 @@ import LoadUserList from "./loadUserList";
  @Inject('store')
 class Index extends Component {
   componentDidMount () {
-    // Taro.switchTab({
-    //   url: '/pages/mine/index'
+    Taro.switchTab({
+      url: '/pages/mine/index'
+    })
+    // Taro.redirectTo({
+    //   url:'/pages/mineInfos/index'
     // })
   }
 

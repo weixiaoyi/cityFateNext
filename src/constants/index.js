@@ -1,0 +1,19 @@
+export const Pages={
+  index:{
+    title:'相亲广场',
+    url:'pages/index/index',
+    absoluteUrl:'/pages/index/index',
+    type:'tab'
+  },
+  mine:{
+    title:'我的相亲',
+    url:'pages/mine/index',
+    absoluteUrl:'/pages/mine/index',
+    type:'tab'
+  },
+  mineInfos:{
+    title:'我的资料',
+    url:'pages/mineInfos/index',
+    absoluteUrl:'/pages/mineInfos/index',
+  },
+}
