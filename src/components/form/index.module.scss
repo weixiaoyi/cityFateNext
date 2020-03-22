@@ -1,0 +1,22 @@
+@import "../../styles/variable.scss";
+.form{
+  :global{
+    .at-input{
+      margin-left: 0;
+    }
+  }
+  .required{
+    color:$red;
+    margin-right: 5px;
+  }
+.textarea{
+  .label{
+    display: flex;
+    margin-bottom: 20px;
+  }
+}
+  .picker{
+
+
+  }
+}

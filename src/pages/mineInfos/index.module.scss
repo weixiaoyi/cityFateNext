@@ -1,4 +1,19 @@
 @import "../../styles/variable";
 .mineInfos{
   padding:0 20px;
+  .uploadAvatar{
+    display:flex;
+    align-items: center;
+  }
+
+  .avatar{
+    display: flex;
+    justify-content: space-between;
+    .text{
+      padding: 30px 20px;
+
+      flex-grow: 1;
+    }
+
+  }
 }
