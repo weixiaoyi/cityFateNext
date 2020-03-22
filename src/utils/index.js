@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
-import _ from './lodash'
 import {Pages} from '../constants'
+
+export {default as _} from './lodash'
 
 export {default as Inject} from './hoc/inject'
 export {default as doLogin} from './hoc/doLogin'

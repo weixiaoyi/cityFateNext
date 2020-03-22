@@ -1,6 +1,8 @@
 import get from 'lodash/get'
+import cloneDeep from 'lodash/cloneDeep'
 
 const _={
-  get
+  get,
+  cloneDeep
 }
 export default  _

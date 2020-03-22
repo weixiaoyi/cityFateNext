@@ -17,6 +17,13 @@
 }
   .picker{
 
-
+    border-bottom: 1px solid #d6e4ef;
+    .label{
+      width:130px;
+    }
+    .select{
+      padding:20px 0;
+      display: flex;
+    }
   }
 }
