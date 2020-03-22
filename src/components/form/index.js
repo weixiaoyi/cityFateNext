@@ -40,8 +40,8 @@ class Form extends Component {
 
               case 'select':{
                 return (
-                  <View className={styles.picker}>
-                    <Picker {...item} key={index} >
+                  <View className={styles.picker} key={index}>
+                    <Picker {...item}  >
                       <View className={styles.label}>
                         {
                           item.required &&<Text className={styles.required}>*</Text>
