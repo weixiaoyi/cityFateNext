@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import {View} from "@tarojs/components";
 // import {AtImagePicker,AtButton,AtForm,AtInput} from 'taro-ui'
-import {Inject, doLogin} from "../../utils";
+import {Inject, doLogin,_} from "../../utils";
 import styles from './index.module.scss'
 import { Form} from "../../components";
-import {Nations,Jobs} from "../../constants";
+import {Nations, Jobs} from "../../constants";
 
 @doLogin
  @Inject('store')
@@ -14,7 +14,6 @@ class MineInfos extends Component {
   }
 
   onSubmit=(e)=>{
-    console.log(e,'---')
   }
 
   render () {
@@ -101,14 +100,24 @@ class MineInfos extends Component {
               title:'职业',
               mode:'multiSelector',
               range:[Object.keys(Jobs).map(item=>({label:item,value:item})),[]],
-              onColumnChange:({column,value})=>{
+              onColumnChange:({column,currentValues})=>{
+                const selectValues=Object.values(currentValues)
+                const values=_.get(Jobs,`${selectValues.join('.')}`)
+                const results=_.isArray(values)?values:values?Object.keys(values):''
                 return {
                   column:column+1,
-                  options:Jobs[value].map(item=>({label:item,value:item}))
+                  options:results&&results.map(item=>({label:item,value:item}))
                 }
               },
               getValue:(value)=>value&&value[1],
               showValue:(getValues)=>getValues,
+              required:true,
+            },
+            {
+              formType:'select',
+              mode:'region',
+              name:'workArea',
+              title:'工作地区',
               required:true,
             },
           ]

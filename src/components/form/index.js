@@ -15,7 +15,8 @@ class Form extends Component {
     const multiSelectors=configs.filter(item=>item.mode==='multiSelector')
     multiSelectors.map(item=>{
       this.setState({
-        [`${MultiSelectorOptions}_${item.name}`]:item.range
+        [`${MultiSelectorOptions}_${item.name}`]:item.range,
+        [`${MultiSelectorOptions}_${item.name}_selected`]:{0:0}
       },()=>this.onColumnChange({column:0,value:0},item))
     })
   }
@@ -29,13 +30,21 @@ class Form extends Component {
 
   onColumnChange=({column,value},item)=>{
     const multiSelector=`${MultiSelectorOptions}_${item.name}`
+    const selected=`${MultiSelectorOptions}_${item.name}_selected`
     const currentList=_.cloneDeep(this.state[multiSelector])
-    if(item.range[column][value]&&item.range[column][value].value){
-      const res=item.onColumnChange({column,value:item.range[column][value].value})
+    if(currentList[column][value]&&currentList[column][value].value){
+      const restores=Object.keys(this.state[selected]).filter(one=>one>column)
+      const currentValues={
+        ...this.state[selected],
+        [column]:currentList[column][value].value,
+      }
+      restores.map(one=>delete currentValues[one])
+      const res=item.onColumnChange({currentValues,column,value,})
       if(res&&res.options){
         currentList[res.column]=res.options
         this.setState({
-          [multiSelector]:currentList
+          [multiSelector]:currentList,
+          [selected]:currentValues
         })
       }
     }
@@ -89,6 +98,10 @@ class Form extends Component {
                         onChange:(e)=>this.onChange(e.detail.value.map((one,ins)=>_.get(this.state[multiSelector],`${ins}.${one}.value`)),item),
                         onColumnChange:(e)=>this.onColumnChange(e.detail,item)
                       }:{}}
+                      {...item.mode==='region'?{
+                        value:[],
+                        rangeKey:undefined
+                      }:{}}
                     >
                       <view className={styles.select}>
                         <View className={styles.label}>
@@ -107,7 +120,7 @@ class Form extends Component {
                             item.mode==='date'&&this.showValue(currentSelect,item)
                           }
                           {
-                            item.mode==='multiSelector'&&this.showValue(currentSelect&&currentSelect.join&&currentSelect.join('-'),item)
+                            (item.mode==='multiSelector'||item.mode==='region')&&this.showValue(currentSelect&&currentSelect.join&&currentSelect.join('-'),item)
                           }
                         </View>
                       </view>
