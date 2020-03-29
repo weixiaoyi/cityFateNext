@@ -43,7 +43,7 @@ class MineInfos extends Component {
               name:'sex',
               title:'性别',
               mode:'selector',
-              range:[{label:'男',value:10},{label:'女',value:9}],
+              range:[{label:'男',value:1},{label:'女',value:0}],
               required:true,
             },
             {
@@ -107,6 +107,8 @@ class MineInfos extends Component {
                   options:Jobs[value].map(item=>({label:item,value:item}))
                 }
               },
+              getValue:(value)=>value&&value[1],
+              showValue:(getValues)=>getValues,
               required:true,
             },
           ]

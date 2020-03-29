@@ -22,7 +22,7 @@ class Form extends Component {
 
   onChange=(value,item)=>{
     this.setState({
-      [item.name]:value
+      [item.name]:item.getValue?item.getValue(value,item):value
     })
     return value
   }
@@ -41,6 +41,9 @@ class Form extends Component {
     }
   }
 
+  showValue=(defaultValue,item)=>item.showValue?
+    item.showValue(this.state[item.name]):item.showDefaultValue?item.showDefaultValue(defaultValue):defaultValue
+
   render() {
     const {configs}=this.props
     return (
@@ -49,6 +52,7 @@ class Form extends Component {
           configs.map((item={},index)=>{
             const type=item.formType
             item.placeholder=item.placeholder||'请输入'
+            const currentSelect=this.state[item.name]
             switch (type){
               case 'input':{
                 return (
@@ -82,16 +86,8 @@ class Form extends Component {
                       {...item.mode==='multiSelector'?{
                         value:'',
                         range:this.state[multiSelector],
-                        onChange:(e)=>{
-                          const {value}=e.detail
-                          this.setState({
-                            [item.name]:value.map((one,ins)=>_.get(this.state[multiSelector],`${ins}.${one}.value`))
-                          })
-                          return value
-                        },
-                        onColumnChange:(e)=>{
-                          this.onColumnChange(e.detail,item)
-                        }
+                        onChange:(e)=>this.onChange(e.detail.value.map((one,ins)=>_.get(this.state[multiSelector],`${ins}.${one}.value`)),item),
+                        onColumnChange:(e)=>this.onColumnChange(e.detail,item)
                       }:{}}
                     >
                       <view className={styles.select}>
@@ -105,13 +101,13 @@ class Form extends Component {
                         </View>
                         <View>
                           {
-                            item.mode==='selector'&&_.get(item,`range.${this.state[item.name]}.label`)
+                            item.mode==='selector'&&this.showValue(_.get(item,`range.${currentSelect}.label`),item)
                           }
                           {
-                            item.mode==='date'&&this.state[item.name]
+                            item.mode==='date'&&this.showValue(currentSelect,item)
                           }
                           {
-                            item.mode==='multiSelector'&&this.state[item.name]&&this.state[item.name].join('-')
+                            item.mode==='multiSelector'&&this.showValue(currentSelect&&currentSelect.join&&currentSelect.join('-'),item)
                           }
                         </View>
                       </view>
