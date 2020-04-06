@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
-import {AtInput,AtTextarea,} from 'taro-ui'
+import {AtInput,AtTextarea,AtButton} from 'taro-ui'
 import {View,Text,Picker} from "@tarojs/components";
 import {_} from '../../utils'
 import styles from './index.module.scss'
@@ -8,10 +8,28 @@ import styles from './index.module.scss'
 const MultiSelectorOptions='multiSelectorOptions'
 
 class Form extends Component {
-  state={}
+  constructor(props){
+    super(props)
+    this.configs=this.getConfigs()
+    this.state={}
+  }
+
+  getConfigs=()=>{
+    const {configs}=this.props
+    return configs.map(item=>{
+      let result=item
+      if(typeof item==='function'){
+        result=item()
+      }
+      if(typeof result.range==='function'){
+        result.range=result.range()
+      }
+      return result
+    })
+  }
 
   componentDidMount() {
-    const {configs}=this.props
+    const configs=this.configs
     const multiSelectors=configs.filter(item=>item.mode==='multiSelector')
     multiSelectors.map(item=>{
       this.setState({
@@ -39,12 +57,15 @@ class Form extends Component {
         [column]:currentList[column][value].value,
       }
       restores.map(one=>delete currentValues[one])
-      const res=item.onColumnChange({currentValues,column,value,})
+      const res=item.onColumnChange({currentValues,column,value})
       if(res&&res.options){
         currentList[res.column]=res.options
         this.setState({
           [multiSelector]:currentList,
-          [selected]:currentValues
+          [selected]:{
+            ...currentValues,
+            [res.column]:res.options[0].value
+          },
         })
       }
     }
@@ -53,49 +74,68 @@ class Form extends Component {
   showValue=(defaultValue,item)=>item.showValue?
     item.showValue(this.state[item.name]):item.showDefaultValue?item.showDefaultValue(defaultValue):defaultValue
 
+  onSubmit=()=>{
+    const {onSubmit}=this.props
+    console.log(this.state,'----state')
+    console.log(this.configs,'---configs')
+  }
+
   render() {
-    const {configs}=this.props
+    const configs=this.configs
+
     return (
       <View className={styles.form}>
         {
           configs.map((item={},index)=>{
+            let Ele=''
             const type=item.formType
             item.placeholder=item.placeholder||'请输入'
             const currentSelect=this.state[item.name]
+            const label=(
+              <View className={styles.label}>
+                {
+                  item.required &&<Text className={styles.required}>*</Text>
+                }
+                {
+                  item.title &&<Text className={styles.title}>{item.title}</Text>
+                }
+              </View>
+            )
+
             switch (type){
+              case 'groupLabel':{
+                Ele= <View {...item} className={styles.groupLabel}>{item.title}</View>
+                break;
+              }
               case 'input':{
-                return (
-                  <AtInput {...item} key={index} onChange={(value)=>this.onChange(value,item)} />
+                Ele=(
+                  <AtInput {...item} onChange={(value)=>this.onChange(value,item)} />
                 )
+                break;
               }
               case 'textarea':{
-                return (
-                  <View className={styles.textarea} key={index}>
-                    <View className={styles.label}>
-                      {
-                        item.required &&<Text className={styles.required}>*</Text>
-                      }
-                      {
-                        item.title &&<Text className={styles.title}>{item.title}</Text>
-                      }
-                    </View>
-                    <AtTextarea {...item} onChange={(value)=>this.onChange(value,item)}  />
+                Ele=(
+                  <View className={styles.textarea}>
+                    {label}
+                    <AtTextarea {...item} onChange={(e)=>this.onChange(e.detail.value,item)}  />
                   </View>
                 )
+                break;
               }
-
               case 'select':{
                 const multiSelector=`${MultiSelectorOptions}_${item.name}`
-                return (
-                  <View className={styles.picker} key={index}>
+                Ele=(
+                  <View className={styles.picker}>
                     <Picker
                       rangeKey='label'
                       {...item}
                       onChange={(e)=>this.onChange(e.detail.value,item)}
                       {...item.mode==='multiSelector'?{
-                        value:'',
+                        value:[],
                         range:this.state[multiSelector],
-                        onChange:(e)=>this.onChange(e.detail.value.map((one,ins)=>_.get(this.state[multiSelector],`${ins}.${one}.value`)),item),
+                        onChange:(e)=>{
+                          this.onChange(e.detail.value.map((one,ins)=>_.get(this.state[multiSelector],`${ins}.${one}.value`)),item)
+                        },
                         onColumnChange:(e)=>this.onColumnChange(e.detail,item)
                       }:{}}
                       {...item.mode==='region'?{
@@ -104,15 +144,8 @@ class Form extends Component {
                       }:{}}
                     >
                       <view className={styles.select}>
-                        <View className={styles.label}>
-                          {
-                            item.required &&<Text className={styles.required}>*</Text>
-                          }
-                          {
-                            item.title &&<Text className={styles.title}>{item.title}</Text>
-                          }
-                        </View>
-                        <View>
+                        {label}
+                        <View className={`${styles.selectValue} pickerSelectValue`}>
                           {
                             item.mode==='selector'&&this.showValue(_.get(item,`range.${currentSelect}.label`),item)
                           }
@@ -127,10 +160,13 @@ class Form extends Component {
                     </Picker>
                   </View>
                 )
+                break;
               }
             }
+            return <View key={index}  className={`${item.showRequiredDistance?styles.showRequiredDistance:null}`}>{Ele}</View>
           })
         }
+        {this.props.onSubmit&&<AtButton onClick={this.onSubmit} type='primary' className={styles.submit}>保存</AtButton>}
       </View>
     )
   }

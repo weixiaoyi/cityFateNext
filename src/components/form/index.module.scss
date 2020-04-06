@@ -5,25 +5,38 @@
       margin-left: 0;
     }
   }
+  .groupLabel{
+    padding:20px 35px;
+    background: $gray;
+    margin:0 -20px 10px;
+  }
   .required{
     color:$red;
     margin-right: 5px;
   }
-.textarea{
+  .showRequiredDistance{
+    padding-left: 20px;
+  }
+  .textarea{
   .label{
     display: flex;
     margin-bottom: 20px;
   }
 }
   .picker{
-
     border-bottom: 1px solid #d6e4ef;
     .label{
-      width:130px;
+      min-width:130px;
     }
     .select{
-      padding:20px 0;
+      padding:20px 10px 20px 0;
       display: flex;
+      .selectValue{
+        flex-grow: 1;
+      }
     }
+  }
+  .submit{
+    margin: 40px 0 30px;
   }
 }

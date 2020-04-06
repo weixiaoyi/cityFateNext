@@ -4,25 +4,30 @@ import {View} from "@tarojs/components";
 import {Inject, doLogin,_} from "../../utils";
 import styles from './index.module.scss'
 import { Form} from "../../components";
-import {Nations, Jobs} from "../../constants";
+import {Nations, Jobs, InfoOptions} from "../../constants";
 
 @doLogin
  @Inject('store')
 class MineInfos extends Component {
-  componentDidMount () {
+  componentDidMount () {}
 
-  }
-
-  onSubmit=(e)=>{
-  }
+  //onSubmit=(e)=>{}
 
   render () {
-    const {store:{homeStore:{userArticlesPage}}}=this.props
+    const {store:{homeStore:{}}}=this.props
 
     return (
       <View className={styles.mineInfos}>
-        <Form configs={
+        <Form
+          onSubmit={values=>{
+            console.log(values,'----values')
+          }}
+          configs={
           [
+            {
+              formType:'groupLabel',
+              title:'基本信息',
+            },
             {
               formType:'textarea',
               name:'introduce',
@@ -57,8 +62,7 @@ class MineInfos extends Component {
               name:'height',
               title:'身高',
               mode:'selector',
-              range:[{label:'145cm以下',value:144}].concat((new Array(201-145))
-                .fill(145).map((item,index)=>({label:`${item+index}cm`,value:item+index}))).concat({label:'200cm以上',value:201}),
+              range:InfoOptions.HeightOptions,
               required:true,
             },
             {
@@ -66,8 +70,7 @@ class MineInfos extends Component {
               name:'weight',
               title:'体重',
               mode:'selector',
-              range:(new Array(131-30))
-                .fill(30).map((item,index)=>({label:`${item+index}kg`,value:item+index})).concat({label:'130以上',value:131}),
+              range:InfoOptions.WeightOptions,
               required:true,
             },
             {
@@ -91,7 +94,7 @@ class MineInfos extends Component {
               name:'education',
               title:'学历',
               mode:'selector',
-              range:['初中及以下','中专','高中','大专','本科','硕士','博士'].map(item=>({label:item,value:item})),
+              range:InfoOptions.EducationOptions,
               required:true,
             },
             {
@@ -116,8 +119,194 @@ class MineInfos extends Component {
             {
               formType:'select',
               mode:'region',
-              name:'workArea',
+              name:'workPlace',
               title:'工作地区',
+              required:true,
+            },
+            {
+              formType:'select',
+              mode:'region',
+              name:'nativePlace',
+              title:'籍贯',
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'maritalStatus',
+              title:'婚姻状况',
+              mode:'selector',
+              range:InfoOptions.MaritalStatusOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'hasChildren',
+              title:'有没有小孩',
+              mode:'selector',
+              range:InfoOptions.HasChildrenOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'willChildren',
+              title:'是否想要小孩',
+              mode:'selector',
+              range:InfoOptions.WillChildrenOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'isSmoker',
+              title:'是否吸烟',
+              mode:'selector',
+              range:InfoOptions.IsSmokerOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'isDrink',
+              title:'是否喝酒',
+              mode:'selector',
+              range:InfoOptions.IsDrink,
+              required:true,
+            },
+            {
+              formType:'groupLabel',
+              title:'联系方式',
+            },
+            {
+              formType:'input',
+              name:'phone',
+              title:'手机号',
+              type:'text',
+              required:true
+            },
+            {
+              formType:'input',
+              name:'weixin',
+              title:'微信号',
+              type:'text',
+              required:true
+            },
+            {
+              formType:'input',
+              name:'qq',
+              title:'QQ',
+              type:'text',
+              showRequiredDistance:true
+            },
+            {
+              formType:'groupLabel',
+              title:'经济实力',
+            },
+            {
+              formType:'select',
+              name:'income',
+              title:'月收入',
+              mode:'selector',
+              range:InfoOptions.InComeOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'housingCondition',
+              title:'住房情况',
+              mode:'selector',
+              range:InfoOptions.HousingConditionOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'carCondition',
+              title:'买车情况',
+              mode:'selector',
+              range:InfoOptions.CarConditionOptions,
+              required:true,
+            },
+            {
+              formType:'groupLabel',
+              title:'择偶要求',
+            },
+            {
+              formType:'select',
+              name:'to_Age',
+              title:'年龄',
+              mode:'multiSelector',
+              range:InfoOptions.ToAge,
+              onColumnChange:InfoOptions.ToAgeChange,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'to_Height',
+              title:'身高',
+              mode:'multiSelector',
+              range:InfoOptions.ToHeightOptions,
+              onColumnChange:InfoOptions.ToHeightOptionsChange,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'to_Education',
+              title:'学历',
+              mode:'selector',
+              range:InfoOptions.ToEducationOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'to_Income',
+              title:'月收入',
+              mode:'selector',
+              range:InfoOptions.ToInComeOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              mode:'region',
+              name:'to_WorkPlace',
+              title:'工作地区',
+              customItem:'不限',
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'to_MaritalStatus',
+              title:'婚姻状况',
+              mode:'selector',
+              range:InfoOptions.ToMaritalStatusOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'to_hasChildren',
+              title:'有没有小孩',
+              mode:'selector',
+              range:InfoOptions.ToHasChildrenOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'to_willChildren',
+              title:'是否想要小孩',
+              mode:'selector',
+              range:InfoOptions.ToWillChildrenOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'to_isSmoker',
+              title:'是否吸烟',
+              mode:'selector',
+              range:InfoOptions.ToIsSmokerOptions,
+              required:true,
+            },
+            {
+              formType:'select',
+              name:'to_isDrink',
+              title:'是否喝酒',
+              mode:'selector',
+              range:InfoOptions.ToIsDrink,
               required:true,
             },
           ]
