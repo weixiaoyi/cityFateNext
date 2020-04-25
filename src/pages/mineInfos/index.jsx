@@ -1,10 +1,45 @@
 import React, { Component } from 'react'
 import {View} from "@tarojs/components";
-// import {AtImagePicker,AtButton,AtForm,AtInput} from 'taro-ui'
 import {Inject, doLogin,_} from "../../utils";
 import styles from './index.module.scss'
 import { Form} from "../../components";
 import {Nations, Jobs, InfoOptions} from "../../constants";
+
+const userInfo={
+  // introduce: "巍峨呃呃",
+  // name: "1",
+  // sex: 0,
+  // birthday: "2020-04-14",
+  // height: 146,
+  // weight: 32,
+  // bloodType: 'A',
+  // nation: '汉族',
+  // education: 5,
+  // job: "客服经理",
+  // nativePlace:  ["北京市", "北京市", "东城区"],
+  // workPlace: ["山西省", "长治市", "城区"],
+  // maritalStatus: 2,
+  // hasChildren: 2,
+  // willChildren: 0,
+  // isSmoker: 1,
+  // isDrink: 3,
+  // phone: "18353268994",
+  // weixin: "1234566",
+  // qq: "呃呃呃呃呃v",
+  // income: 8000,
+  // housingCondition: 3,
+  // carCondition: 2,
+  // to_Age:[18, 21],
+  // to_Height: [147, 149],
+  // to_Education: 3,
+  // to_Income: 5000,
+  // to_WorkPlace: ["河北省", "秦皇岛市", "北戴河区"],
+  // to_MaritalStatus: 3,
+  // to_hasChildren: 3,
+  // to_isDrink: 1,
+  // to_isSmoker: 2,
+  // to_willChildren: 3,
+}
 
 @doLogin
  @Inject('store')
@@ -33,14 +68,14 @@ class MineInfos extends Component {
               name:'introduce',
               title:'自我介绍',
               type:'text',
-              required:true
+              required:true,
             },
             {
               formType:'input',
               name:'name',
               title:'姓名',
               type:'text',
-              required:true
+              required:true,
             },
             {
               formType:'select',
@@ -48,7 +83,7 @@ class MineInfos extends Component {
               title:'性别',
               mode:'selector',
               range:[{label:'男',value:1},{label:'女',value:0}],
-              required:true,
+              required:true
             },
             {
               formType:'select',
@@ -78,7 +113,7 @@ class MineInfos extends Component {
               name:'bloodType',
               title:'血型',
               mode:'selector',
-              range:['A','B','AB','O','其他'].map(item=>({label:item,value:item})),
+              range:['A','B','AB','O','其他'].map((item)=>({label:item,value:item})),
               required:true,
             },
             {
@@ -86,7 +121,7 @@ class MineInfos extends Component {
               name:'nation',
               title:'名族',
               mode:'selector',
-              range:Nations.map(item=>({label:item,value:item})),
+              range:Nations.map((item)=>({label:item,value:item})),
               required:true,
             },
             {
@@ -309,7 +344,10 @@ class MineInfos extends Component {
               range:InfoOptions.ToIsDrink,
               required:true,
             },
-          ]
+          ].map(item=>({
+            ...item,
+            value:item.value||userInfo[item.name]
+          }))
         }
         />
       </View>

@@ -11,7 +11,7 @@ class Form extends Component {
   constructor(props){
     super(props)
     this.configs=this.getConfigs()
-    this.state={}
+    this.state=this.getInitState()
   }
 
   getConfigs=()=>{
@@ -24,8 +24,21 @@ class Form extends Component {
       if(typeof result.range==='function'){
         result.range=result.range()
       }
+      if(result.mode==='selector'&&result.range){
+        const value=result.value
+        const findIndex=result.range.findIndex(one=>one.value===value)
+        result.value=findIndex
+      }
       return result
     })
+  }
+
+  getInitState=()=>{
+    const {configs}=this.props
+    return configs.reduce((sum,next)=>{
+      sum[next.name]=next.value
+      return sum
+    },{})
   }
 
   componentDidMount() {
@@ -76,8 +89,18 @@ class Form extends Component {
 
   onSubmit=()=>{
     const {onSubmit}=this.props
-    console.log(this.state,'----state')
-    console.log(this.configs,'---configs')
+    const results=this.configs.reduce((sum,item={})=>{
+      if(item.mode==='selector'){
+        const ins=Number(this.state[item.name])
+        if(ins>=0&&item.range[ins]){
+          sum[item.name]=item.range[ins].value
+        }
+      }else if(item.name){
+        sum[item.name]=this.state[item.name]
+      }
+      return sum
+    },{})
+    onSubmit(results)
   }
 
   render() {
