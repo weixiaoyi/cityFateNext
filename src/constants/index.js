@@ -17,6 +17,11 @@ export const Pages={
     url:'pages/mineInfos/index',
     absoluteUrl:'/pages/mineInfos/index',
   },
+  personPage:{
+    title:'个人主页',
+    url:'pages/personPage/index',
+    absoluteUrl:'/pages/personPage/index',
+  },
 }
 
 

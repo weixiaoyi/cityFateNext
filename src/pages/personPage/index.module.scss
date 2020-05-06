@@ -1,0 +1,59 @@
+@import "../../styles/variable";
+.personPage{
+  padding:0 20px;
+  :global{
+    .horDivide{
+      margin:0 -20px;
+    }
+  }
+  .title{
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  .header{
+    height:140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    Image{
+      width:120px;
+      height:120px;
+      border-radius: 10px;
+    }
+  }
+  .images{
+    padding:20px 0;
+  }
+
+  .personInfos,.toPersonInfos{
+    margin-top: 20px;
+    .infoTags{
+      display: flex;
+      flex-wrap: wrap;
+      >View{
+        padding:0 5px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .toPersonInfos{
+    margin-bottom: 10px;
+  }
+  .innerIntroduce{
+    margin: 20px 0;
+    .introduce{
+      line-height: $lineHeight;
+    }
+  }
+  .trends{
+    margin:20px 0;
+    .message{
+      display: flex;
+      .timestamp{
+        width:120px;
+      }
+    }
+  }
+
+}

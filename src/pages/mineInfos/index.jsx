@@ -66,7 +66,7 @@ class MineInfos extends Component {
             {
               formType:'textarea',
               name:'introduce',
-              title:'自我介绍',
+              title:'内心独白',
               type:'text',
               required:true,
             },

@@ -9,3 +9,16 @@ page{
 .at-tabs__item {
   font-size: $baseFontSize !important;
 }
+
+.horDivide{
+  border-bottom: 10px solid red;
+}
+
+.at-image-picker__flex-box{
+  padding:unset;
+  .at-image-picker__flex-item{
+    &:first-child{
+      margin-left: unset;
+    }
+  }
+}

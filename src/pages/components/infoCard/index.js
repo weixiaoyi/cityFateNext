@@ -55,7 +55,8 @@ class InfoCard extends Component {
             </View>
           </View>
         </View>
-        <View className={styles.announce}>等一人迟暮，择一人终老......愿无岁月可回首；且以深情共白头</View>
+        <View className={styles.announce}>等一人迟暮，择一人终老......愿无岁月可回首；且以深情共白头等一人迟暮，
+          择一人终老......愿无岁月可回首；且以深情共白头等一人迟暮，择一人终老......愿无岁月可回首；且以深情共白头</View>
       </View>
     )
   }

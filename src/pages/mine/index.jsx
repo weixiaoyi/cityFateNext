@@ -15,7 +15,7 @@ class Mine extends Component {
   }
 
   render () {
-    const {store:{homeStore:{userArticlesPage}}}=this.props
+    const {store:{homeStore:{}}}=this.props
 
     return (
       <View className={styles.mine}>
@@ -37,7 +37,7 @@ class Mine extends Component {
           <Title>相亲舞台</Title>
           <AtList>
             <AtListItem title='我的资料' arrow='right' onClick={routerGo('mineInfos')} />
-            <AtListItem title='我的动态' arrow='right' />
+            <AtListItem title='我的主页' arrow='right' onClick={routerGo('personPage')} />
             <AtListItem title='我关注的' arrow='right' />
             <AtListItem title='关注我的' arrow='right' />
             <AtListItem title='谁看过我' arrow='right' />

@@ -12,7 +12,7 @@ import LoadUserList from "./loadUserList";
  @Inject('store')
 class Index extends Component {
   componentDidMount () {
-    routerGo('mineInfos')()
+     routerGo('personPage')()
   }
 
 
